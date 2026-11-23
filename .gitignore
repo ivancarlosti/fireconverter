@@ -1,0 +1,27 @@
+# Local environment files (never commit real secrets).
+.env
+.env.*
+!.env.example
+
+# Go build output
+/bin/
+/tmp/
+*.test
+*.out
+
+# Frontend dependencies and build output. The empty placeholder is committed so
+# `//go:embed all:dist` also compiles in a fresh clone before the first build.
+web/node_modules/
+web/dist/*
+!web/dist/.gitkeep
+web/.vite/
+
+# ffmpeg.wasm core is copied from node_modules by scripts/sync-ffmpeg-core.mjs.
+web/public/ffmpeg/ffmpeg-core.js
+web/public/ffmpeg/ffmpeg-core.wasm
+
+# Editor and OS noise
+.DS_Store
+.idea/
+.vscode/
+*.log

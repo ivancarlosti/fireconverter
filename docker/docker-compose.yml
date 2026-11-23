@@ -1,0 +1,45 @@
+name: fireconverter
+
+# FireConverter — local compose stack.
+#
+# Start from the repository root:
+#   docker compose -f docker/docker-compose.yml up --build
+#
+# The service publishes http://localhost:3069. Put it behind an authenticating
+# reverse proxy before exposing it to the internet.
+services:
+  fireconverter:
+    image: ghcr.io/ivancarlosti/fireconverter:local
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "${APP_PORT:-3069}:3000"
+    environment:
+      APP_PORT: "3000"
+      WORK_DIR: /tmp/fireconverter
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      MAX_UPLOAD_MB: "${MAX_UPLOAD_MB:-2048}"
+      MAX_DURATION_SECONDS: "${MAX_DURATION_SECONDS:-21600}"
+      JOB_TTL_MINUTES: "${JOB_TTL_MINUTES:-60}"
+      MAX_CONCURRENT_JOBS: "${MAX_CONCURRENT_JOBS:-2}"
+      MAX_JOBS_PER_IP: "${MAX_JOBS_PER_IP:-4}"
+      TARGET_SIZE_MAX_MB: "${TARGET_SIZE_MAX_MB:-4096}"
+      APP_TRUST_PROXY: "${APP_TRUST_PROXY:-false}"
+    volumes:
+      - fireconverter-work:/tmp/fireconverter
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+volumes:
+  fireconverter-work:
+    name: fireconverter-work

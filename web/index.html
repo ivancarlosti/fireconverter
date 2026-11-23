@@ -1,0 +1,37 @@
+<!doctype html>
+<!--
+  Shell of the FireConverter SPA.
+
+  `lang` and `dir` are placeholders: src/i18n/index.ts sets them from the active
+  locale (ar-SA flips the document to RTL). `/theme.js` applies the stored theme
+  before the first paint so a dark-mode user never sees a white flash.
+-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="mask-icon" href="/logo.svg" color="#f97316" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1120" />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FireConverter" />
+    <meta property="og:title" content="FireConverter — private media conversion" />
+    <meta property="og:description" content="Convert images, audio and video on your device, or use the server for video. Hit a target file size." />
+    <meta property="og:image" content="/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/logo.png" />
+
+    <title>FireConverter</title>
+    <meta name="description" content="Private, local-first image, audio and video conversion with target file sizes." />
+
+    <script src="/theme.js"></script>
+  </head>
+  <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

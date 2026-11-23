@@ -1,0 +1,25 @@
+# Documentation and planning are not needed to compile the binary.
+docs
+plans
+docker
+.github
+
+# VCS and local environment
+.git
+.gitignore
+**/.env
+**/.env.*
+!**/.env.example
+
+# Frontend dependencies and previous build (rebuilt in stage 1).
+web/node_modules
+web/dist
+web/.vite
+web/public/ffmpeg/ffmpeg-core.js
+web/public/ffmpeg/ffmpeg-core.wasm
+
+# Local artifacts
+bin
+tmp
+*.log
+.DS_Store
