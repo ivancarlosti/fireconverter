@@ -9,10 +9,7 @@ name: fireconverter
 # reverse proxy before exposing it to the internet.
 services:
   fireconverter:
-    image: ghcr.io/ivancarlosti/fireconverter:local
-    build:
-      context: ..
-      dockerfile: Dockerfile
+    image: ghcr.io/ivancarlosti/fireconverter:latest
     restart: unless-stopped
     init: true
     stop_grace_period: 30s
@@ -32,7 +29,7 @@ services:
       TARGET_SIZE_MAX_MB: "${TARGET_SIZE_MAX_MB:-4096}"
       APP_TRUST_PROXY: "${APP_TRUST_PROXY:-false}"
     volumes:
-      - fireconverter-work:/tmp/fireconverter
+      - ./fireconverter-work:/tmp/fireconverter
     healthcheck:
       test: ["CMD", "wget", "-q", "-O-", "http://127.0.0.1:3000/api/health"]
       interval: 30s

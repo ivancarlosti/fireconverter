@@ -25,6 +25,7 @@ web/                     Vue 3 + Vite SPA
   src/stores/converter.ts  queue, plans, polling, downloads
   scripts/                i18n checker, ffmpeg-core copier, screenshots
   public/ffmpeg/         generated core (not committed)
+  public/sw.js           one-time cleanup for stale service workers (not a PWA)
   dist/                  build output, embedded by Go
 docs/                    user, API and operations documentation
 plans/                   implementation plans
@@ -85,6 +86,9 @@ They need a running instance and Chrome:
 cd web
 SMOKE_BASE_URL=http://localhost:3069 node scripts/e2e-image.mjs
 
+# legacy service-worker cleanup
+SMOKE_BASE_URL=http://localhost:3069 node scripts/e2e-service-worker.mjs
+
 # local audio (quality and target)
 SMOKE_BASE_URL=http://localhost:3069 node scripts/e2e-local.mjs
 
@@ -102,7 +106,13 @@ docker run -d --name fc-api -p 3001:3000 fireconverter:test
 The image/audio/video smoke scripts default to `http://localhost:3000`; `e2e-ui`
 defaults to `3003`. Set `SMOKE_BASE_URL` when testing the compose stack on 3069.
 
-Both scripts fail on browser console errors, so a CSP regression is caught.
+The scripts fail on browser console errors, so a CSP regression is caught.
+`e2e-service-worker.mjs` registers the cleanup worker and verifies that it
+deletes CacheStorage and unregisters itself.
+
+`web/public/sw.js` is not a PWA service worker and the app never registers it.
+It exists only so browsers that still have a worker from an older deployment can
+replace it and drop the stale caches; do not add a registration for it.
 
 ## Screenshots
 

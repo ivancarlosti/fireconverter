@@ -96,6 +96,8 @@ short 320×180 clip is a good first test.
 | :-- | :-- |
 | *Server conversion is unavailable* | Start the Docker image (it includes ffmpeg) or install `ffmpeg`/`ffprobe` on the host. Local conversion still works. |
 | Local engine fails to load | Check that `/ffmpeg/ffmpeg-core.wasm` returns `200 application/wasm`; a proxy must not strip it or change the content type. |
+| Local engine fails after an upgrade; the console shows `sw.js` serving from cache | An old service worker from a previous deployment is still installed. DevTools → Application → Service Workers → **Unregister**, then Application → Storage → **Clear site data** (this also resets preferences; deleting just the Cache Storage entries is enough), close every FireConverter tab and reopen. Current builds serve a self-removing `/sw.js`; the next update check clears old registrations automatically. If the script URL starts with `chrome-extension://`, disable that extension instead. |
+| Console shows `A listener indicated an asynchronous response…` | A browser extension is using `chrome.runtime` messaging; it is unrelated to conversion. Disable extensions or retry in a clean profile to confirm. |
 | `target_too_small` | Increase the target; the error reports the minimum. |
 | `target_missed` | The encoder could not reach the cap even after retrying; increase the target slightly. |
 | Upload rejected with `too_large` | Raise `MAX_UPLOAD_MB` or use the local engine. |

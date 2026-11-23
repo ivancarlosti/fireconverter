@@ -80,7 +80,11 @@ to the published host port (`3069` with the default compose file). Requirements:
 2. **Allow long uploads and downloads** (large videos, progress polling).
 3. **Set `APP_TRUST_PROXY=true`** only if the proxy overwrites
    `X-Forwarded-For`.
-4. **Add authentication** before exposing the instance: FireConverter has no
+4. **Do not cache `/sw.js`.** It is a one-time cleanup worker for browsers that
+   still have a service worker from an older deployment. The server sends
+   `Cache-Control: no-cache`; a proxy cache or an `expires` rule must not
+   override it, or those registrations cannot update.
+5. **Add authentication** before exposing the instance: FireConverter has no
    login of its own.
 
 ### Caddy

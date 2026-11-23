@@ -28,6 +28,14 @@ func (s *Server) spa() http.Handler {
 				serveAsset(w, assets, requested)
 				return
 			}
+			// A missing script must not fall through to index.html. The browser
+			// parses the HTML as JavaScript, and a service-worker update silently
+			// keeps the previous worker. This is what made /sw.js impossible to
+			// replace after the old deployment stopped shipping it.
+			if looksLikeAsset(requested) {
+				writeError(w, http.StatusNotFound, "not_found", "asset not found: "+requested)
+				return
+			}
 		}
 		index, err := fs.ReadFile(assets, "index.html")
 		if err != nil {
@@ -63,6 +71,10 @@ func serveAsset(w http.ResponseWriter, assets fs.FS, name string) {
 	}
 
 	switch {
+	case name == "sw.js":
+		// The legacy cleanup worker must be revalidated on every visit so an
+		// old registration can always be replaced.
+		w.Header().Set("Cache-Control", revalidate)
 	case strings.HasPrefix(name, "assets/"):
 		w.Header().Set("Cache-Control", immutableCache)
 	case strings.HasPrefix(name, "ffmpeg/"):
@@ -75,4 +87,16 @@ func serveAsset(w http.ResponseWriter, assets fs.FS, name string) {
 	w.Header().Set("Content-Type", contentType)
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(data)
+}
+
+// looksLikeAsset reports whether a path is a static script or style file that
+// must never be answered with the SPA shell. The list is intentionally narrow:
+// client-side routes may contain dots, but they do not end in these extensions.
+func looksLikeAsset(name string) bool {
+	switch strings.ToLower(path.Ext(name)) {
+	case ".js", ".mjs", ".css", ".wasm":
+		return true
+	default:
+		return false
+	}
 }
