@@ -182,17 +182,30 @@ MIT — see [LICENSE](LICENSE). FireConverter is an independent implementation
 inspired by [VERT.sh](https://vert.sh); no VERT source code is included.
 
 <!-- buttons -->
-[![Quick start](https://img.shields.io/badge/Quick_start-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](#quick-start)
-[![Documentation](https://img.shields.io/badge/Documentation-docs-0F172A?style=for-the-badge&logo=readthedocs&logoColor=white)](docs/usage.md)
-[![API](https://img.shields.io/badge/API-reference-2563EB?style=for-the-badge&logo=openapiinitiative&logoColor=white)](docs/api.md)
-[![License](https://img.shields.io/badge/License-MIT-16A34A?style=for-the-badge)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/ivancarlosti/fireconverter?label=⭐%20Stars&color=gold&style=flat)](https://github.com/ivancarlosti/fireconverter/stargazers)
+[![Watchers](https://img.shields.io/github/watchers/ivancarlosti/fireconverter?label=Watchers&style=flat&color=red)](https://github.com/sponsors/ivancarlosti)
+[![Forks](https://img.shields.io/github/forks/ivancarlosti/fireconverter?label=Forks&style=flat&color=ff69b4)](https://github.com/sponsors/ivancarlosti)
+[![Downloads](https://img.shields.io/github/downloads/ivancarlosti/fireconverter/total?label=Downloads&color=success)](https://github.com/ivancarlosti/fireconverter/releases)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/ivancarlosti/fireconverter?label=Activity)](https://github.com/ivancarlosti/fireconverter/pulse)
+[![GitHub Issues](https://img.shields.io/github/issues/ivancarlosti/fireconverter?label=Issues&color=orange)](https://github.com/ivancarlosti/fireconverter/issues)  
+[![License](https://img.shields.io/github/license/ivancarlosti/fireconverter?label=License)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ivancarlosti/fireconverter?label=Last%20Commit)](https://github.com/ivancarlosti/fireconverter/commits)
+[![Security](https://img.shields.io/badge/Security-View%20Here-purple)](https://github.com/ivancarlosti/fireconverter/security)
+[![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-2.1-4baaaa)](https://github.com/ivancarlosti/fireconverter?tab=coc-ov-file)
 <!-- endbuttons -->
 
 <!-- footer -->
-<p align="center">
-  <strong>FireConverter</strong> — images and audio stay on your device; video is your choice.
-</p>
-<p align="center">
-  Built with Go, Vue 3, Tailwind CSS and ffmpeg.
-</p>
+---
 
+## 🧑‍💻 Consulting and technical support
+* For personal support and queries, please submit a new issue to have it addressed.
+* For commercial related questions, please [**contact me**][ivancarlos] for consulting costs.
+
+[cc]: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project
+[contributing]: https://docs.github.com/en/articles/setting-guidelines-for-repository-contributors
+[security]: https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository
+[support]: https://docs.github.com/en/articles/adding-support-resources-to-your-project
+[it]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+[prt]: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository
+[funding]: https://docs.github.com/en/articles/displaying-a-sponsor-button-in-your-repository
+[ivancarlos]: https://ivancarlos.me
